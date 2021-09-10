@@ -4,6 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import spring.security.service.domain.Role;
 import spring.security.service.domain.User;
 import spring.security.service.service.UserService;
@@ -16,7 +18,10 @@ public class SpringSecurityServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSecurityServiceApplication.class, args);
 	}
-
+@Bean
+	PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+}
 	@Bean
 	CommandLineRunner run(UserService userService){
 		return args -> {
